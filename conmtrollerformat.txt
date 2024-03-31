@@ -1,0 +1,17 @@
+left
+right
+up
+down
+is a Hat
+left right (-1, i), (1, i)
+up down, (i, 1) (i, -1)
+
+Y 3
+X 0
+A 1
+B 2
+
+L1 4
+L2 6
+R1 5
+R2 7
