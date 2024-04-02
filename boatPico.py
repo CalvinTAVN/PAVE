@@ -1,16 +1,16 @@
 from machine import I2C
-#from hmc5883l import HMC5883L
+#from hmc5883l import HMC5883L #compass
 from time import sleep
 import time
-from bn880 import BN880
-from humPro import humPro
+from bn880 import BN880  #GPS
+from boatCode.humPro import humPro #RF
 import math
 
 DO_TELEM = True
 
 # check that correct PINs are set on hmc5883l library
 if DO_TELEM:
-    #compass = HMC5883L()
+    compass = HMC5883L()
     gps = BN880()
 
 rf = humPro(

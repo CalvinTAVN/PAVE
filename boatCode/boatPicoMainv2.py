@@ -1,8 +1,12 @@
+#Raspberry pico on boat
+#micropython
+
+
 from machine import I2C
 #from hmc5883l import HMC5883L
 from time import sleep
 import time
-from humPro import humPro
+from boatCode.humPro import humPro
 import math
 
 DO_TELEM = True
@@ -54,6 +58,9 @@ yVelo = 0
 
 print("start")
 lastMessage = ""
+
+cycle = 0
+
 while True:
     sleep(0.001)
     led.toggle()
@@ -71,7 +78,12 @@ while True:
     '''
     
     rf.readData()
+    #if rf.getData() is not None and rf.getData() != lastMessage:
+    #    print(rf.getData())
+    #    lastMessage = rf.getData()
     if rf.getData() is not None and rf.getData() != lastMessage:
         print(rf.getData())
-        #print(byteIn.decode("utf-8").replace("\n",""))
         lastMessage = rf.getData()
+    elif cycle == 0 and rf.getData() == lastMessage:
+        print(rf.getData())
+    cycle = (cycle + 1) % 30

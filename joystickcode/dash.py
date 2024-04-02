@@ -74,3 +74,5 @@ while True:
 
     #print(str(int((joystick.get_axis(3)+1)*5000000)).zfill(8)+"x")
     #write_read(str(int((joystick.get_axis(3)+1)*5000000)).zfill(8)+"x")
+
+

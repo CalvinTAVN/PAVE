@@ -10,19 +10,7 @@ for port, desc, hwid in sorted(ports):
                 #pico = serial.Serial(port=port, baudrate=9600, timeout=0.1)
                 currentPorts.remove(port)
                 break
-                
-    else:
-        #arduino = serial.Serial(port=port, baudrate=9600, timeout=0.1)
-        break
-
-print(len(currentPorts))
-"""
-try:
-    arduino1 = serial.Serial(port=currentPorts[0], baudrate=9600, timeout=0.1)
-    currentPorts.remove(currentPorts[0])
-except: 
-    arduino1 = serial.Serial(port=currentPorts[1], baudrate=9600, timeout=0.1)
-    currentPorts.remove(currentPorts[1])
+            
 
 arduino1 = serial.Serial(port=currentPorts[0], baudrate=9600, timeout=0.1)
-"""
+arduino2 = serial.Serial(port=currentPorts[1], baudrate=9600, timeout=0.1)
