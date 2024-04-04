@@ -57,9 +57,7 @@ def write_read(controller, x= ""):
 
 
 print("Start")
-killCounter = 0
 counter = 0
-cycle = 0
 connectedPico = True
 lastMessage = ""
 while True:
@@ -73,40 +71,35 @@ while True:
     if connectedPico: 
         stringIn = receivedSignal.decode("utf-8").replace("\r", "").replace("\n", "")
         #print(f"counter: {counter} {stringIn}")
-        if stringIn != "" and len(stringIn) == 9 and stringIn[8]=="0":
+        #if stringIn != "" and len(stringIn) == 9:
+        if (len(stringIn) == 9):
             if stringIn != lastMessage:
-                killCounter = 0
                 counter = 0
-            if cycle == 0:
-                #print(stringIn)
-                steeringInformation = stringIn[0:4]
-                throttleInfo = stringIn[5:8]
-                if (counter < 100):
-                    throttle = int(throttleInfo)
-                else:
-                    throttle = 0
-                #print("throttle: ", throttle)
-                pwm.start(throttle)
-                #print(steeringInformation)
-                for arduino in arduinos:
-                    try:
-                        write_read(arduino, steeringInformation)  
-                    except: 
-                        pwm.start(0) 
-                #print(stringIn)
-                print("steering: " + steeringInformation + " throttle: " + str(throttle) + " counter: " + str(counter))
-                lastMessage = stringIn
-            #cycle = (cycle + 1) % 10
+            #print(stringIn)
+            steeringInformation = stringIn[0:4]
+            throttleInfo = stringIn[5:8]
+            if (counter < 100):
+                throttle = int(throttleInfo)
+            else:
+                throttle = 0
+            pwm.start(throttle)
+            for arduino in arduinos:
+                try:
+                    write_read(arduino, steeringInformation)  
+                except: 
+                    pwm.start(0) 
+            print("steering: " + steeringInformation + " throttle: " + str(throttle) + " counter: " + str(counter))
+            lastMessage = stringIn
             pico.flush()
         counter+=1
-        if (counter > 100 or ((len(stringIn) == 9) and (stringIn[8]=="1"))):
+        if (counter > 100):
             #for arduino in arduinos:
                 #write_read(arduinos, "0500")
             pwm.start(0)
             print("noConnection")
     
     else:
-        print("not connected Pico")
+        print("not connected boatPico")
         pwm.start(0)
 
 
