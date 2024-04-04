@@ -78,9 +78,6 @@ while True:
     '''
     
     rf.readData()
-    #if rf.getData() is not None and rf.getData() != lastMessage:
-    #    print(rf.getData())
-    #    lastMessage = rf.getData()
     if rf.getData() is not None and rf.getData() != lastMessage:
         print(rf.getData())
         lastMessage = rf.getData()
