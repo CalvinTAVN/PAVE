@@ -36,7 +36,7 @@ screen = de.Screen(h, w, [
     de.Button([30, 20, 20, 8], "stop Throttle", de.colors['red'], de.fonts['default'], lambda: print("stop Throttle")),
     de.H_Slider([20, 80, 60, 8], "act_steering", de.colors['sec'], de.fonts['default'], -1, 1),
     de.V_Slider([10, 60, 5, 38], "act_throttle", de.colors['sec'], de.fonts['default'], 0, 100),
-    de.Button([30, 40, 20, 8], "stopSignalOut", de.colors['red'], de.fonts['default'], lambda: print("stop Signal Out")),
+    de.Button([30, 40, 20, 8], "Connected", de.colors['green'], de.fonts['default'], lambda: print("Connected")),
 ])
 
 # Joystick
