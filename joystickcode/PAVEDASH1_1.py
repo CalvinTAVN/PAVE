@@ -124,6 +124,8 @@ while True:
 
     #add random noise into system
     outPutSignal = outPutSignal + random.choice(randomList)
+    outPutSignal = outPutSignal + "1"
+
 
     # Draw
     screen.draw(screen.screen)
@@ -132,7 +134,11 @@ while True:
 
     outPutSignal = outPutSignal + "x"
     print("after: ", outPutSignal)
-    
-    write_read(outPutSignal)
+    try:
+        #write_read(str(steering).zfill(4))
+        write_read(outPutSignal)
+    except: 
+        print("writingtoPicoError")
+        
 
     

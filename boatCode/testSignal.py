@@ -19,7 +19,7 @@ file = open(current_time + ".txt", "w")
 
 def print(text):
     file.write(str(text)+"\n")
-    #sys.stdout.write(str(text)+"\n")
+    sys.stdout.write(str(text)+"\n")
 
 arduinos = []
 for port, desc, hwid in sorted(ports):
@@ -37,9 +37,6 @@ for port, desc, hwid in sorted(ports):
         except:
             print("oof")
 
-    
-
-
 #setup pwm signal
 GPIO.setwarnings(False)  
 GPIO.setmode(GPIO.BOARD)
@@ -47,14 +44,13 @@ GPIO.setup(33, GPIO.OUT)
 pwm = GPIO.PWM(33, 500)
 pwm.start(0)
 
-def write_read(controller, readData,  x= ""):
+def write_read(controller, x= ""):
     if (x != ""):
         controller.write(bytes(x, 'utf-8'))
-    time.sleep(0.001)
-    data = None
-    if readData:
-        data = controller.readline()
+    #time.sleep(0.001)
+    data = controller.readline()
     return data
+
 
 
 print("Start")
@@ -62,10 +58,10 @@ counter = 0
 connectedPico = True
 lastMessage = ""
 signalTimeOut = 20
-cycle = 0
+
 while True:
     try:
-        receivedSignal = write_read(pico, True) 
+        receivedSignal = write_read(pico) 
         connectedPico = True
     except serial.serialutil.SerialException:
         print("picoUnplugged")
@@ -78,7 +74,7 @@ while True:
         if (len(stringIn) == 9):
             if stringIn != lastMessage:
                 counter = 0
-            #print(stringIn)
+            print(stringIn)
             steeringInformation = stringIn[0:4]
             throttleInfo = stringIn[4:7]
             if (counter < signalTimeOut):
@@ -86,31 +82,8 @@ while True:
             else:
                 throttle = 0
             pwm.start(throttle)
-            if (cycle == 0):
-                for arduino in arduinos:
-                    try:
-                        write_read(arduino, False, steeringInformation)  
-                    except: 
-                        print("oofCantSendArduinoSerial")
-                        pwm.start(0)
-                print("steering: " + steeringInformation + " throttle: " + str(throttle) + " counter: " + str(counter))
-            cycle = (cycle + 1) % 5
-            lastMessage = stringIn
-            pico.flush()
-        counter+=1  
-        if (counter > signalTimeOut):
-            #for arduino in arduinos:
-                #write_read(arduinos, "0500")
-            pwm.start(0)
-            print("noConnection")
-    
-    else:
-        print("not connected boatPico")
-        pwm.start(0)
-
-
-        
-            
-        
-
-
+            for arduino in arduinos:
+                try:
+                    write_read(arduino, steeringInformation)  
+                except: 
+                    pwm.start(0) 

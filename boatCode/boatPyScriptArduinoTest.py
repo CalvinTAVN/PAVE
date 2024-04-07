@@ -2,6 +2,7 @@ import time
 import serial
 import RPi.GPIO as GPIO
 from datetime import datetime
+import sys
 
 #receiving signal information from pico
 #bottom right usb port for wifi dongle
@@ -11,32 +12,39 @@ from datetime import datetime
 import serial.tools.list_ports
 ports = serial.tools.list_ports.comports()
 
-now = datetime.now()
+#now = datetime.now()
 
-current_time = now.strftime("%H:%M:%S")
-file = open(current_time + ".txt", "w")
+#current_time = now.strftime("%H:%M:%S")
+#file = open(current_time + ".txt", "w")
+
+def print(text):
+    #file.write(str(text)+"\n")
+    sys.stdout.write(str(text)+"\n")
 
 arduinos = []
 for port, desc, hwid in sorted(ports):
     print(hwid)
     for i in hwid.split():
-        if i.startswith("SER="):
+        if i.startswith("SER="):    
             if i == "SER=e661640843856f28":
                 pico = serial.Serial(port=port, baudrate=9600, timeout=0.1)
                 print("mappedPico")
                 break
+            """
     else:
         try:
             arduinos.append(serial.Serial(port=port, baudrate=9600, timeout=0.1))
             print("appendedArduino")
         except:
             print("oof")
+            """
+arduino = serial.Serial(port="/dev/ttyACM1", baudrate=9600, timeout=0.1)
 
     
 
 
 #setup pwm signal
-GPIO.setwarnings(False)
+GPIO.setwarnings(False)  
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(33, GPIO.OUT)
 pwm = GPIO.PWM(33, 500)
@@ -45,63 +53,54 @@ pwm.start(0)
 def write_read(controller, x= ""):
     if (x != ""):
         controller.write(bytes(x, 'utf-8'))
-    time.sleep(0.01)
+    time.sleep(0.001)
     data = controller.readline()
     return data
 
 
 
-file.write("Start")
-killCounter = 0
+print("Start")
 counter = 0
-cycle = 0
 connectedPico = True
 lastMessage = ""
-while killCounter <= 100:
-    #print("kilCount: ", killCounter)
+signalTimeOut = 20
+while True:
     try:
         receivedSignal = write_read(pico) 
-    except:
+        connectedPico = True
+    except serial.serialutil.SerialException:
+        print("picoUnplugged")
         pwm.start(0)    
         connectedPico = False
-    if connectedPico:    
+    if connectedPico: 
         stringIn = receivedSignal.decode("utf-8").replace("\r", "").replace("\n", "")
-        if stringIn != "" and len(stringIn) == 9 and stringIn[8]=="0":
+        #print(f"counter: {counter} {stringIn}")
+        #if stringIn != "" and len(stringIn) == 9:
+        if (len(stringIn) == 9):
             if stringIn != lastMessage:
-                killCounter = 0
-            if cycle == 0:
-                #print(stringIn)
-                steeringInformation = stringIn[0:4]
-                throttleInfo = stringIn[4:7]
+                counter = 0
+            #print(stringIn)
+            steeringInformation = stringIn[0:4]
+            throttleInfo = stringIn[4:7]
+            if (counter < signalTimeOut):
                 throttle = int(throttleInfo)
-                #print("throttle: ", throttle)
-                pwm.start(throttle)
-                #print(steeringInformation)
-                for arduino in arduinos:
-                    try:
-                        write_read(arduino, steeringInformation)  
-                    except: 
-                        pwm.start(0) 
-                file.write("steering: " + steeringInformation + " throttle: " + throttleInfo + " counter: " + str(counter))
-                lastMessage = stringIn
-            cycle = (cycle + 1) % 10
-            counter = 0
+            else:
+                throttle = 0
+            pwm.start(throttle)
+            write_read(arduino, steeringInformation)  
+            print("steering: " + steeringInformation + " throttle: " + str(throttle) + " counter: " + str(counter))
+            lastMessage = stringIn
             pico.flush()
         counter+=1
-        if (counter > 100 or ((len(stringIn) == 9) and (stringIn[8]=="1"))):
+        if (counter > signalTimeOut):
             #for arduino in arduinos:
                 #write_read(arduinos, "0500")
             pwm.start(0)
-            file.write("noConnection")
+            print("noConnection")
     
     else:
+        print("not connected boatPico")
         pwm.start(0)
-
-    killCounter+=1
-else:
-    pwm.start(0)
-    file.write("killed")
-    file.close()
 
 
         
