@@ -78,15 +78,15 @@ while True:
         if (len(stringIn) == 9):
             if stringIn != lastMessage:
                 counter = 0
-            #print(stringIn)
-            steeringInformation = stringIn[0:4]
-            throttleInfo = stringIn[4:7]
-            if (counter < signalTimeOut):
-                throttle = int(throttleInfo)
-            else:
-                throttle = 0
-            pwm.start(throttle)
             if (cycle == 0):
+                #print(stringIn)
+                steeringInformation = stringIn[0:4]
+                throttleInfo = stringIn[4:7]
+                if (counter < signalTimeOut):
+                    throttle = int(throttleInfo)
+                else:
+                    throttle = 0
+                pwm.start(throttle)
                 for arduino in arduinos:
                     try:
                         write_read(arduino, False, steeringInformation)  
@@ -97,7 +97,7 @@ while True:
             cycle = (cycle + 1) % 5
             lastMessage = stringIn
             pico.flush()
-        counter+=1  
+        counter+=1      
         if (counter > signalTimeOut):
             #for arduino in arduinos:
                 #write_read(arduinos, "0500")
