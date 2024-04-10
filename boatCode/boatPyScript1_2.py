@@ -88,11 +88,14 @@ while True:
                     throttle = 0
                 pwm.start(throttle)
                 for arduino in arduinos:
+                    write_read(arduino, False, steeringInformation)  
+                    """
                     try:
                         write_read(arduino, False, steeringInformation)  
                     except: 
                         print("oofCantSendArduinoSerial")
                         pwm.start(0)
+                    """
                 print("steering: " + steeringInformation + " throttle: " + str(throttle) + " counter: " + str(counter))
             cycle = (cycle + 1) % 10
             lastMessage = stringIn
