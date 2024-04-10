@@ -45,8 +45,8 @@ for arduino in arduinos:
 #setup pwm signal
 GPIO.setwarnings(False)  
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(33, GPIO.OUT)
-pwm = GPIO.PWM(33, 500)
+GPIO.setup(2, GPIO.OUT)
+pwm = GPIO.PWM(2, 500)
 pwm.start(0)
 
 def write_read(controller, readData,  x= ""):
