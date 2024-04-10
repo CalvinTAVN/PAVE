@@ -57,7 +57,7 @@ counter = 0
 cycle = 0
 connectedPico = True
 lastMessage = ""
-while killCounter <= 100:
+while True:
     #print("kilCount: ", killCounter)
     try:
         receivedSignal = write_read(pico) 
