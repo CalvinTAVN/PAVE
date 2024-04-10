@@ -36,7 +36,7 @@ for port, desc, hwid in sorted(ports):
             print("appendedArduino")
         except:
             print("oof")
-arduinos.append(serial.Serial(port="/dev/ttyUSB1", baudrate=9600, timeout=0.1))
+#arduinos.append(serial.Serial(port="/dev/ttyUSB1", baudrate=9600, timeout=0.1))
     
 for arduino in arduinos:
     if arduino.name.startswith("/dev/tty/ACM"):
@@ -91,9 +91,8 @@ while True:
                 pwm.start(throttle)
                 for arduino in arduinos:
                     try:
-                        #print(arduino)
+                        print(arduino)
                         write_read(arduino, False, steeringInformation)  
-                        1==1
                     except: 
                         print("oofCantSendArduinoSerial")
                         pwm.start(0)
