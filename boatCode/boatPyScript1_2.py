@@ -30,13 +30,15 @@ for port, desc, hwid in sorted(ports):
                 pico = serial.Serial(port=port, baudrate=9600, timeout=0.1)
                 print("mappedPico")
                 break
+    """
     else:
         try:
             arduinos.append(serial.Serial(port=port, baudrate=9600, timeout=0.1))
             print("appendedArduino")
         except:
             print("oof")
-
+    """
+arduinos.append(serial.Serial(port="/dev/ttyAMA0", baudrate=9600, timeout=0.1))
     
 
 
