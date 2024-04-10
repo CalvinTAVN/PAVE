@@ -91,7 +91,7 @@ while True:
                 pwm.start(throttle)
                 for arduino in arduinos:
                     try:
-                        print(arduino)
+                        #print(arduino)
                         write_read(arduino, False, steeringInformation)  
                     except: 
                         print("oofCantSendArduinoSerial")
