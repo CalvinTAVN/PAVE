@@ -38,7 +38,7 @@ for port, desc, hwid in sorted(ports):
         except:
             print("oof")
     """
-arduinos.append(serial.Serial(port="/dev/ttyAMA0", baudrate=9600, timeout=0.1))
+arduinos.append(serial.Serial(port="/dev/ttyUSB1", baudrate=9600, timeout=0.1))
     
 
 
