@@ -39,7 +39,7 @@ for port, desc, hwid in sorted(ports):
 #arduinos.append(serial.Serial(port="/dev/ttyUSB1", baudrate=9600, timeout=0.1))
     
 for arduino in arduinos:
-    if arduino.name.startswith("/dev/tty/AM"):
+    if arduino.name.startswith("/dev/ttyAM"):
         arduinos.remove(arduino)
 
 #setup pwm signal
