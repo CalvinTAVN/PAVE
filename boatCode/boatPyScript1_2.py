@@ -69,6 +69,7 @@ while True:
     try:
         receivedSignal = write_read(pico, True) 
         connectedPico = True
+        print("signalTrue")
     except serial.serialutil.SerialException:
         print("picoUnplugged")
         pwm.start(0)    
