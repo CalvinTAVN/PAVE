@@ -15,7 +15,10 @@ ports = serial.tools.list_ports.comports()
 now = datetime.now()
 
 current_time = now.strftime("%H:%M:%S")
-file = open('data/' + current_time + ".txt", "w")
+try:
+    file = open('/home/pes/Documents/PAVE/boatCode/data/' + current_time + ".txt", "w")
+except:
+    pass
 
 def print(text):
     file.write(str(text)+"\n")
