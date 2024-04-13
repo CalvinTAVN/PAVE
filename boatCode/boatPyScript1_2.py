@@ -71,16 +71,15 @@ lastMessage = ""
 signalTimeOut = 100
 cycle = 0
 while True:
-    #try:
-    receivedSignal = write_read(pico, True) 
-    connectedPico = True
-    
-    """
+    try:
+        receivedSignal = write_read(pico, True) 
+        connectedPico = True
     except serial.serialutil.SerialException:
         print("picoUnplugged")
         pwm.start(0)    
         connectedPico = False
         try:
+            pico.close()
             for port, desc, hwid in sorted(ports):
                 for i in hwid.split():
                     if i.startswith("SER="):  
@@ -88,8 +87,7 @@ while True:
                             pico = serial.Serial(port=port, baudrate=9600, timeout=0.1)
                             print("mappedPico2")
         except:
-            print("fuck")
-    """        
+            print("fuck")        
     if connectedPico: 
         stringIn = receivedSignal.decode("utf-8").replace("\r", "").replace("\n", "")
         #print(f"counter: {counter} value: {stringIn}")
