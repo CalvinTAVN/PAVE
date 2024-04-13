@@ -19,7 +19,7 @@ file = open(current_time + ".txt", "w")
 
 def print(text):
     file.write(str(text)+"\n")
-    sys.stdout.write(str(text)+"\n")
+    #sys.stdout.write(str(text)+"\n")
 
 arduinos = []
 for port, desc, hwid in sorted(ports):
@@ -89,6 +89,10 @@ while True:
                     throttle = int(throttleInfo)
                 else:
                     throttle = 0
+                if (throttle < 0):
+                    throttle = 0
+                elif (throttle > 100):
+                    throttle = 100
                 pwm.start(throttle)
                 for arduino in arduinos:
                     try:
