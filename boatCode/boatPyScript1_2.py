@@ -103,7 +103,7 @@ while True:
                         print("oofCantSendArduinoSerial")
                         pwm.start(0)
                 print("steering: " + steeringInformation + " throttle: " + str(throttle) + " counter: " + str(counter))
-            cycle = (cycle + 1) % 3
+            cycle = (cycle + 1) % 10
             lastMessage = stringIn
             pico.flush()
         counter+=1      
