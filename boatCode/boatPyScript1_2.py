@@ -16,7 +16,7 @@ now = datetime.now()
 
 current_time = now.strftime("%H:%M:%S")
 
-file = open('/home/pes/Documents/PAVE/boatCode/data/' + current_time + ".txt", "w")
+file = open(current_time + ".txt", "w")
 
     
 
