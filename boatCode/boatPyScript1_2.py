@@ -15,7 +15,7 @@ ports = serial.tools.list_ports.comports()
 now = datetime.now()
 
 current_time = now.strftime("%H:%M:%S")
-file = open(current_time + ".txt", "w")
+file = open('data/' + current_time + ".txt", "w")
 
 def print(text):
     #file.write(str(text)+"\n")
