@@ -75,7 +75,7 @@ while True:
         connectedPico = False
     if connectedPico: 
         stringIn = receivedSignal.decode("utf-8").replace("\r", "").replace("\n", "")
-        print(f"counter: {counter} {stringIn}")
+        print(f"counter: {counter} value: {stringIn}")
         #if stringIn != "" and len(stringIn) == 9:
         throttle = 0
         if (len(stringIn) == 9):
