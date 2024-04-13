@@ -19,8 +19,8 @@ file = open('data/' + current_time + ".txt", "w")
 
 def print(text):
     #file.write(str(text)+"\n")
-    #sys.stdout.write(str(text)+"\n")
-    1==1
+    sys.stdout.write(str(text)+"\n")
+    
 
 arduinos = []
 for port, desc, hwid in sorted(ports):
