@@ -22,7 +22,7 @@ current_time = now.strftime("%H:%M:%S")
 
 def print(text):
     #file.write(str(text)+"\n")
-    #sys.stdout.write(str(text)+"\n")
+    sys.stdout.write(str(text)+"\n")
     
 time.sleep(5)
 arduinos = []
@@ -45,8 +45,6 @@ for port, desc, hwid in sorted(ports):
 for arduino in arduinos:
     if arduino.name.startswith("/dev/ttyAM"):
         arduinos.remove(arduino)
-
-
 
 
 #setup pwm signal
@@ -122,7 +120,7 @@ while True:
                         print("oofCantSendArduinoSerial")
                         pwm.start(0)
                 print("steering: " + steeringInformation + " throttle: " + str(throttle) + " counter: " + str(counter))
-            cycle = (cycle + 1) % 5
+            cycle = (cycle + 1) % 10
             lastMessage = stringIn
             pico.flush()
         counter+=1      
