@@ -46,9 +46,7 @@ for arduino in arduinos:
     if arduino.name.startswith("/dev/ttyAM"):
         arduinos.remove(arduino)
 
-#test
-pico.close()
-pico.open()
+
 
 
 #setup pwm signal
