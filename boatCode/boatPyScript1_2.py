@@ -21,7 +21,7 @@ def print(text):
     file.write(str(text)+"\n")
     sys.stdout.write(str(text)+"\n")
     
-
+time.sleep(5)
 arduinos = []
 for port, desc, hwid in sorted(ports):
     print(port)
