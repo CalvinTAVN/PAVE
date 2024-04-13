@@ -89,7 +89,6 @@ while True:
                     throttle = int(throttleInfo)
                 else:
                     throttle = 0
-                print("throttle:" + str(throttle))
                 pwm.start(throttle)
                 for arduino in arduinos:
                     try:
