@@ -78,6 +78,7 @@ while True:
         print("picoUnplugged")
         pwm.start(0)    
         connectedPico = False
+        """
         try:
             pico.close()
             for port, desc, hwid in sorted(ports):
@@ -87,7 +88,8 @@ while True:
                             pico = serial.Serial(port=port, baudrate=9600, timeout=0.1)
                             print("mappedPico2")
         except:
-            print("fuck")        
+            print("fuck")  
+        """      
     if connectedPico: 
         stringIn = receivedSignal.decode("utf-8").replace("\r", "").replace("\n", "")
         #print(f"counter: {counter} value: {stringIn}")
