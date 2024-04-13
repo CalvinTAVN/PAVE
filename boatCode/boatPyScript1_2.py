@@ -18,7 +18,7 @@ current_time = now.strftime("%H:%M:%S")
 file = open('data/' + current_time + ".txt", "w")
 
 def print(text):
-    #file.write(str(text)+"\n")
+    file.write(str(text)+"\n")
     sys.stdout.write(str(text)+"\n")
     
 
