@@ -19,7 +19,7 @@ file = open(current_time + ".txt", "w")
 
 def print(text):
     file.write(str(text)+"\n")
-    #sys.stdout.write(str(text)+"\n")
+    sys.stdout.write(str(text)+"\n")
 
 arduinos = []
 for port, desc, hwid in sorted(ports):
@@ -63,7 +63,7 @@ print("Start")
 counter = 0
 connectedPico = True
 lastMessage = ""
-signalTimeOut = 20
+signalTimeOut = 100
 cycle = 0
 while True:
     try:
