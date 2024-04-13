@@ -80,12 +80,15 @@ while True:
         print("picoUnplugged")
         pwm.start(0)    
         connectedPico = False
-        for port, desc, hwid in sorted(ports):
-            for i in hwid.split():
-                if i.startswith("SER="):  
-                    if i == "SER=e661640843856f28":
-                        pico = serial.Serial(port=port, baudrate=9600, timeout=0.1)
-                        print("mappedPico2")
+        try:
+            for port, desc, hwid in sorted(ports):
+                for i in hwid.split():
+                    if i.startswith("SER="):  
+                        if i == "SER=e661640843856f28":
+                            pico = serial.Serial(port=port, baudrate=9600, timeout=0.1)
+                            print("mappedPico2")
+        except:
+            print("fuck")
                         
     if connectedPico: 
         stringIn = receivedSignal.decode("utf-8").replace("\r", "").replace("\n", "")
