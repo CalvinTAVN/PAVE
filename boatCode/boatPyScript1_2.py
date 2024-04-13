@@ -24,7 +24,7 @@ def print(text):
     #file.write(str(text)+"\n")
     sys.stdout.write(str(text)+"\n")
     
-time.sleep(5)
+time.sleep(15)
 arduinos = []
 for port, desc, hwid in sorted(ports):
     print(f"port: {port}  desc: {desc}  hwid: {hwid}")
