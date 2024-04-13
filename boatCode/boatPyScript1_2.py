@@ -28,7 +28,8 @@ for port, desc, hwid in sorted(ports):
     print(desc)
     print(hwid)
     for i in hwid.split():
-        if i.startswith("SER="):    
+        if i.startswith("SER="): 
+            print("i: ", i)   
             if i == "SER=e661640843856f28":
                 pico = serial.Serial(port=port, baudrate=9600, timeout=0.1)
                 print("mappedPico")
