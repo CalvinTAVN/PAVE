@@ -48,7 +48,6 @@ for arduino in arduinos:
 
 #test
 pico.close()
-time.sleep(2)
 pico.open()
 
 
