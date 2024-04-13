@@ -14,8 +14,11 @@ import serial
 import random
 
 #use com 5
-arduino = serial.Serial(port='COM5', baudrate=9600, timeout=.1)
-
+try:
+    print("connected to Arduino")
+    arduino = serial.Serial(port='COM5', baudrate=9600, timeout=.1)
+except: 
+    print("oofshorePico")
 
 def write_read(x):
     try:
@@ -133,6 +136,7 @@ while True:
     pygame.time.Clock().tick(30)
 
     outPutSignal = outPutSignal + "x"
+    
     print("after: ", outPutSignal)
     try:
         #write_read(str(steering).zfill(4))
