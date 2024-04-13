@@ -59,7 +59,7 @@ def write_read(controller, readData,  x= ""):
     if (x != ""):
         controller.write(bytes(x, 'utf-8'))
     time.sleep(0.001)
-    controller.flush()
+    #controller.flush()
     data = None
     if readData:
         data = controller.readline()
@@ -121,7 +121,7 @@ while True:
                 print("steering: " + steeringInformation + " throttle: " + str(throttle) + " counter: " + str(counter))
             cycle = (cycle + 1) % 10
             lastMessage = stringIn
-            #pico.flush()
+            pico.flush()
         counter+=1      
         if (counter > signalTimeOut):
             #for arduino in arduinos:
