@@ -22,7 +22,7 @@ current_time = now.strftime("%H:%M:%S")
 
 def print(text):
     #file.write(str(text)+"\n")
-    sys.stdout.write(str(text)+"\n")
+    #sys.stdout.write(str(text)+"\n")
     
 time.sleep(5)
 arduinos = []
@@ -122,7 +122,7 @@ while True:
                         print("oofCantSendArduinoSerial")
                         pwm.start(0)
                 print("steering: " + steeringInformation + " throttle: " + str(throttle) + " counter: " + str(counter))
-            cycle = (cycle + 1) % 10
+            cycle = (cycle + 1) % 5
             lastMessage = stringIn
             pico.flush()
         counter+=1      
