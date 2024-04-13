@@ -57,7 +57,7 @@ def write_read(controller, readData,  x= ""):
     if (x != ""):
         controller.write(bytes(x, 'utf-8'))
     time.sleep(0.001)
-    #controller.flush()
+    controller.flush()
     data = None
     if readData:
         data = controller.readline()
