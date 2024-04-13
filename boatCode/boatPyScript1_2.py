@@ -27,9 +27,7 @@ def print(text):
 time.sleep(5)
 arduinos = []
 for port, desc, hwid in sorted(ports):
-    print(port)
-    print(desc)
-    print(hwid)
+    print(f"port: {port}  desc: {desc}  hwid: {hwid}")
     for i in hwid.split():
         if i.startswith("SER="):  
             if i == "SER=e661640843856f28":
