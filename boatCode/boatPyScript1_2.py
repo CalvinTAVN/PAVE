@@ -69,14 +69,13 @@ while True:
     try:
         receivedSignal = write_read(pico, True) 
         connectedPico = True
-        print("signalTrue")
     except serial.serialutil.SerialException:
         print("picoUnplugged")
         pwm.start(0)    
         connectedPico = False
     if connectedPico: 
         stringIn = receivedSignal.decode("utf-8").replace("\r", "").replace("\n", "")
-        #print(f"counter: {counter} {stringIn}")
+        print(f"counter: {counter} {stringIn}")
         #if stringIn != "" and len(stringIn) == 9:
         throttle = 0
         if (len(stringIn) == 9):
