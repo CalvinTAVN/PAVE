@@ -24,6 +24,8 @@ def print(text):
 
 arduinos = []
 for port, desc, hwid in sorted(ports):
+    print(port)
+    print(desc)
     print(hwid)
     for i in hwid.split():
         if i.startswith("SER="):    
