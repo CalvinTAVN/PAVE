@@ -16,12 +16,12 @@ now = datetime.now()
 
 current_time = now.strftime("%H:%M:%S")
 
-file = open(current_time + ".txt", "w")
+#file = open(current_time + ".txt", "w")
 
     
 
 def print(text):
-    file.write(str(text)+"\n")
+    #file.write(str(text)+"\n")
     sys.stdout.write(str(text)+"\n")
     
 time.sleep(5)
